@@ -1,3 +1,4 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -14,13 +15,9 @@ import java.util.Map;
 
 public class GenerateStudentText {
 
-    public static ArrayList<String> FIELDSFORSTUDENTTXT;
-    public static ArrayList<String> FIELDSFORSTUDENTDAT;
-
-    public static void main(String[] args) throws IOException{
-
+    public static void createStudentTXT(String fileLocation) throws IOException{
+        ArrayList<String> FIELDSFORSTUDENTTXT;
         FIELDSFORSTUDENTTXT = new ArrayList<String>();
-        FIELDSFORSTUDENTDAT = new ArrayList<String>();
 
         FIELDSFORSTUDENTTXT.add("First Name");
         FIELDSFORSTUDENTTXT.add("Middle Name");
@@ -31,9 +28,7 @@ public class GenerateStudentText {
         FIELDSFORSTUDENTTXT.add("Homeroom");
         FIELDSFORSTUDENTTXT.add("School Location");
 
-
-        String filePath = "A:\\KoskiFiles\\SampleData.xlsx";
-        FileInputStream inputStream = new FileInputStream(new File(filePath));
+        FileInputStream inputStream = new FileInputStream(new File(fileLocation));
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet sheet = workbook.getSheetAt(0);
 
@@ -66,5 +61,6 @@ public class GenerateStudentText {
         workbook.close();
         inputStream.close();
     }
+
 
 }
