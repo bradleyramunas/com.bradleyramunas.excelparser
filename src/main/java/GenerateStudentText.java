@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +16,8 @@ import java.util.Map;
 
 public class GenerateStudentText {
 
-    public static void createStudentTXT(String fileLocation) throws IOException{
+    public static void createStudentTXT(String fileLocation, String storageLocation) throws IOException{
+        PrintWriter printWriter = new PrintWriter(new File(storageLocation + "//testme.txt"));
         ArrayList<String> FIELDSFORSTUDENTTXT;
         FIELDSFORSTUDENTTXT = new ArrayList<String>();
 
@@ -46,17 +48,19 @@ public class GenerateStudentText {
         Iterator<Row> rows = sheet.iterator();
         rows.next();
         while(rows.hasNext()){
-            System.out.println("*************************");
+            String built = "";
             Row row = rows.next();
             for(String s : FIELDSFORSTUDENTTXT){
                 Cell cell = row.getCell(columnMapping.get(s));
                 if(cell.getCellType() == Cell.CELL_TYPE_STRING){
-                    System.out.print(cell.getStringCellValue() + ",");
+                    built += cell.getStringCellValue() + ",";
                 }else if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC){
-                    System.out.print(cell.getNumericCellValue() + ",");
+                    built += cell.getNumericCellValue() + ",";
                 }
             }
-            System.out.println();
+            built = built.substring(0, built.length()-1);
+            printWriter.println(built);
+
         }
         workbook.close();
         inputStream.close();

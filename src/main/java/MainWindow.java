@@ -55,12 +55,12 @@ public class MainWindow extends JFrame{
     }
 
     public void createStudentTXT() throws IOException{
-        GenerateStudentText.createStudentTXT(textField1.getText());
+        GenerateStudentText.createStudentTXT(textField1.getText(), textField2.getText());
     }
 
     public String getFileDirectory(){
         String desktopDirectory = System.getProperty("user.home");
-        JFileChooser jFileChooser = new JFileChooser(desktopDirectory + "/Desktop");
+        JFileChooser jFileChooser = new JFileChooser(desktopDirectory + "\\Desktop");
         jFileChooser.setDialogTitle("Choose a file directory");
         jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         jFileChooser.showOpenDialog(mainFrame);
